@@ -2,7 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const date = new Date();
-let userSelectedDate = selectedDates[0];
+let userSelectedDate;
 const startBtn = document.querySelector('button');
 
 const fp = flatpickr('#datetime-picker', {
