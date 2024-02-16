@@ -23,8 +23,8 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < Date.now()) {
-      iziToast.error({
-        iconUrl: '/img/x-octagon.svg',
+      iziToast.show({
+        iconUrl: './img/x-octagon.svg',
         title: 'Error',
         titleColor: '#ffffff',
         message: 'Please choose a date in the future',
