@@ -1,9 +1,11 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-const date = Date.now();
 let userSelectedDate;
-const inputValueTimer = document.querySelector('#datetime-picer');
+let changeDateValue;
+const inputValueTimer = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
 const dataValueDays = document.querySelector('span[data-days]');
 const dataValueHours = document.querySelector('span[data-hours]');
@@ -11,6 +13,8 @@ const dataValueMinutes = document.querySelector('span[data-minutes]');
 const dataValueSeconds = document.querySelector('span[data-seconds]');
 
 startBtn.setAttribute('disabled', '');
+startBtn.classList.add('disabled-btn');
+inputValueTimer.classList.add('input-check');
 
 const options = {
   enableTime: true,
@@ -18,11 +22,28 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    if (selectedDates[0] < date) {
-      window.alert('Please choose a date in the future');
+    if (selectedDates[0] < Date.now()) {
+      iziToast.error({
+        iconUrl: '../img/x-octagon.svg',
+        title: 'Error',
+        titleColor: '#ffffff',
+        message: 'Please choose a date in the future',
+        messageColor: '#ffffff',
+        backgroundColor: '#EF4040',
+        position: 'topRight',
+        maxWidth: 902,
+        titleSize: 16,
+        messageSize: 16,
+        close: false,
+      });
+      startBtn.classList.add('disabled-btn');
+      startBtn.classList.remove('active-btn');
       startBtn.setAttribute('disabled', '');
     } else {
       startBtn.removeAttribute('disabled');
+      inputValueTimer.classList.add('input-disabled');
+      startBtn.classList.add('active-btn');
+      startBtn.classList.remove('disabled-btn');
       userSelectedDate = selectedDates[0];
       updateTimerValue;
     }
@@ -57,14 +78,27 @@ function addLeadingZero(value) {
 }
 
 function updateTimerValue() {
-  const { days, hours, minutes, seconds } = convertMs(
-    userSelectedDate - Date.now()
-  );
+  const delta = userSelectedDate - Date.now();
+  if (delta <= 0) {
+    clearInterval(changeDateValue);
+    return;
+  } else {
+    startBtn.classList.add('disabled-btn');
+    startBtn.classList.remove('active-btn');
+    startBtn.setAttribute('disabled', '');
+    inputValueTimer.setAttribute('disabled', '');
+    inputValueTimer.classList.remove('input-check');
+  }
+  const { days, hours, minutes, seconds } = convertMs(delta);
+
   dataValueDays.textContent = addLeadingZero(days);
   dataValueHours.textContent = addLeadingZero(hours);
   dataValueMinutes.textContent = addLeadingZero(minutes);
   dataValueSeconds.textContent = addLeadingZero(seconds);
-  const changeDateValue = setInterval(updateTimerValue, 1000);
 }
 
-startBtn.addEventListener('click', updateTimerValue);
+startBtn.addEventListener('click', startUpdateTimerValue);
+
+function startUpdateTimerValue() {
+  changeDateValue = setInterval(updateTimerValue, 1000);
+}
