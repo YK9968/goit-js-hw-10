@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import cross from '../img/x-octagon.svg';
 
 let userSelectedDate;
 let changeDateValue;
@@ -24,7 +25,7 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] < Date.now()) {
       iziToast.show({
-        iconUrl: './img/x-octagon.svg',
+        iconUrl: cross,
         title: 'Error',
         titleColor: '#ffffff',
         message: 'Please choose a date in the future',
