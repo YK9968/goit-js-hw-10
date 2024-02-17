@@ -3,7 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import cross from '../img/x-octagon.svg';
-
+// ====================================================================================^ import ^
 let userSelectedDate;
 let changeDateValue;
 const inputValueTimer = document.querySelector('#datetime-picker');
@@ -12,11 +12,11 @@ const dataValueDays = document.querySelector('span[data-days]');
 const dataValueHours = document.querySelector('span[data-hours]');
 const dataValueMinutes = document.querySelector('span[data-minutes]');
 const dataValueSeconds = document.querySelector('span[data-seconds]');
-
+// ===================================================================================== ^ variables ^
 startBtn.setAttribute('disabled', '');
 startBtn.classList.add('disabled-btn');
 inputValueTimer.classList.add('input-check');
-
+// ================================================================================ ^ defolt view items ^
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -46,12 +46,12 @@ const options = {
       startBtn.classList.add('active-btn');
       startBtn.classList.remove('disabled-btn');
       userSelectedDate = selectedDates[0];
-      updateTimerValue;
     }
   },
 };
 
 const fp = flatpickr('#datetime-picker', options);
+// ========================================================= ^ check past/future time + library flatpickr ^
 
 function convertMs(ms) {
   const second = 1000;
@@ -69,6 +69,7 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+// =====================================================================================^ convert ms ^
 
 function addLeadingZero(value) {
   if (value < 10) {
@@ -77,6 +78,7 @@ function addLeadingZero(value) {
     return value;
   }
 }
+// ==================================================================================== ^ update value ^
 
 function updateTimerValue() {
   const delta = userSelectedDate - Date.now();
@@ -97,10 +99,11 @@ function updateTimerValue() {
   dataValueMinutes.textContent = addLeadingZero(minutes);
   dataValueSeconds.textContent = addLeadingZero(seconds);
 }
+// ====================================================== ^ change timer value + change defolt view items ^
+startBtn.addEventListener('click', handleStartUpdateTimerValue);
 
-startBtn.addEventListener('click', startUpdateTimerValue);
-
-function startUpdateTimerValue() {
+function handleStartUpdateTimerValue() {
   updateTimerValue();
   changeDateValue = setInterval(updateTimerValue, 1000);
 }
+// ============================================================================= ^ start timer ^
