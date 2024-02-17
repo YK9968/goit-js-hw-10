@@ -101,5 +101,6 @@ function updateTimerValue() {
 startBtn.addEventListener('click', startUpdateTimerValue);
 
 function startUpdateTimerValue() {
+  updateTimerValue();
   changeDateValue = setInterval(updateTimerValue, 1000);
 }
