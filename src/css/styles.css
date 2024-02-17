@@ -49,6 +49,7 @@
   border-style: none;
   cursor: auto;
 }
+
 .input-check {
   border: 1px solid #808080;
 }
@@ -58,11 +59,6 @@
   border-radius: 4px;
   width: 272px;
   height: 40px;
-}
-
-.input-check:active,
-:focus {
-  border: 1px solid #4e75ff;
 }
 
 .input-disabled {
