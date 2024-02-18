@@ -85,13 +85,13 @@ function updateTimerValue() {
   if (delta <= 0) {
     clearInterval(changeDateValue);
     return;
-  } else {
-    startBtn.classList.add('disabled-btn');
-    startBtn.classList.remove('active-btn');
-    startBtn.setAttribute('disabled', '');
-    inputValueTimer.setAttribute('disabled', '');
-    inputValueTimer.classList.remove('input-check');
   }
+  startBtn.classList.add('disabled-btn');
+  startBtn.classList.remove('active-btn');
+  startBtn.setAttribute('disabled', '');
+  inputValueTimer.setAttribute('disabled', '');
+  inputValueTimer.classList.remove('input-check');
+
   const { days, hours, minutes, seconds } = convertMs(delta);
 
   dataValueDays.textContent = addLeadingZero(days);

@@ -2,21 +2,19 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 // ========================================================================== ^ import ^
 const formEl = document.querySelector('.form');
-let delay;
-let radioValue;
 // ========================================================================== ^ var ^
 formEl.addEventListener('submit', handleShowPromise);
 
 function handleShowPromise(evt) {
   evt.preventDefault();
-  delay = formEl.elements.delay.value;
-  radioValue = formEl.elements.state.value;
+  const delay = formEl.elements.delay.value;
+  const radioValue = formEl.elements.state.value;
   function showPromise(time, value) {
     return new Promise((res, rej) => {
       setTimeout(() => {
         if (value === 'fulfilled') {
           res(time);
-        } else value === 'rejected';
+        }
         rej(time);
       }, delay);
       formEl.reset();
