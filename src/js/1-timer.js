@@ -2,7 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import cross from '../img/x-octagon.svg';
+import cross from '../img/error.svg';
 // ====================================================================================^ import ^
 let userSelectedDate;
 let changeDateValue;
@@ -28,13 +28,13 @@ const options = {
         iconUrl: cross,
         title: 'Error',
         titleColor: '#ffffff',
-        message: 'Please choose a date in the future',
         messageColor: '#ffffff',
+        message: 'Please choose a date in the future',
         backgroundColor: '#EF4040',
         position: 'topRight',
-        maxWidth: 902,
         titleSize: 16,
         messageSize: 16,
+        maxWidth: 902,
         close: false,
       });
       startBtn.classList.add('disabled-btn');
